@@ -5,24 +5,21 @@ import java.net.*;
 
 import javax.swing.*;
 
-public class Exe31_4_02 extends JApplet {
+public class Exe31_4_2 extends JApplet {
     private static final long serialVersionUID = 1L;
 
-    private JLabel jlblCount = new JLabel();
+    private JLabel jlCount = new JLabel();
 
-    // Indicate if it runs as application
-    private boolean isStandAlone = false;
+    private boolean bb = false;
 
     private String host = "localhost";
 
-
-    @SuppressWarnings("resource")
     public void init() {
-        add(jlblCount);
+        add(jlCount);
 
         try {
             Socket socket;
-            if (isStandAlone)
+            if (bb)
                 socket = new Socket(host, 8000);
             else
                 socket = new Socket(getCodeBase().getHost(), 8000);
@@ -30,7 +27,7 @@ public class Exe31_4_02 extends JApplet {
             DataInputStream inputFromServer = new DataInputStream( socket.getInputStream());
 
             int count = inputFromServer.readInt();
-            jlblCount.setText("You are visitor number " + count);
+            jlCount.setText("You are visitor number " + count);
 
             inputFromServer.close();
         } catch (IOException ex) {
@@ -40,10 +37,10 @@ public class Exe31_4_02 extends JApplet {
 
     public static void main(String[] args) {
 
-        JFrame frame = new JFrame("Ex31_4_02");
+        JFrame frame = new JFrame("Ex31_4_2");
 
-        Exe31_4_02 applet = new Exe31_4_02();
-        applet.isStandAlone = true;
+        Exe31_4_2 applet = new Exe31_4_2();
+        applet.bb = true;
 
         if (args.length == 1)
             applet.host = args[0];
